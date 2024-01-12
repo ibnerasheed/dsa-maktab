@@ -1,28 +1,43 @@
+from dsa.common.exceptions import OverflowException,UnderflowException
+
 class FixedSizeQueue:
-    def __init__(self, size):
-        self.__data = [None]*size
+    def __init__(self, capacity):
+        self.__data = [None]*capacity
         self.__rear = -1
         self.__front = -1
+        self.__capacity = capacity
+        self.__size = 0
 
     def empty(self):
-        return self.__rear and self.__front == -1 
+        return self.__size == 0
     
     def enqueue(self, data):
-        if self.empty():
-            self.__rear+=1
-            self.__front+=1
-            self.__data[self.__front] = data
-        else:    
-            self.__rear = self.__rear + 1
-            self.__data[self.__rear] = data
+        if self.__size == self.__capacity:
+            raise OverflowException('Queue Overflow')
+        
+        if self.empty(): 
+            self.__front = (self.__front + 1) % self.__capacity
+        
+        self.__rear = (self.__rear + 1) % self.__capacity
+        self.__data[self.__rear] = data 
+        self.__size+=1    
+
+        
+            
 
     def dequeue(self):
-        pass
-        
+        if self.empty():
+            raise UnderflowException('Queue Underflow')
+        dequeued_element = self.__data[self.__front]
+        self.__front = (self.__front + 1) % self.__capacity
+        self.__size-=1
+        return dequeued_element
+   
    
     def __str__(self) -> str:
         temp = ""
-        for index in range(self.__rear + 1):
-            temp = f"{temp}{self.__data[index]}, "
-            index+=1
+        temp_front = self.__front
+        for _ in range(self.__size):
+            temp = f"{temp}{self.__data[temp_front]}, "
+            temp_front = (temp_front + 1) % self.__capacity
         return f"[{temp[:-2]}]"    

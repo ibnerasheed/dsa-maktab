@@ -12,7 +12,7 @@ class FixedSizeStack(object):
     def push(self,data):
         stackIsFull = (self._top == (len(self._data)-1))
         if stackIsFull:
-            raise OverflowException
+            raise OverflowException('Stack Overflow')
         
         self._top = self._top + 1
         self._data[self._top] = data
