@@ -46,6 +46,6 @@ class TestFixedSizeStack(unittest.TestCase):
         with self.assertRaises(UnderflowException) as suf:
             popElement = self.stack.pop()
         self.assertEqual('Stack Underflow',suf.exception.getMessage())
-
+  
 if __name__== "__main__":
     unittest.main()

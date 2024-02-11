@@ -4,6 +4,7 @@ from dsa.common.node import Node
 class LinkedList:
     def __init__(self):
         self.__head = None
+        
 
     def empty(self):
         return not self.__head

@@ -9,5 +9,12 @@ class DoubleyNode:
         self.next = next 
         self.previous = previous  
 
+class TreeNode:
+    def __init__(self, data, left=None, right=None, father=None):
+        self.data = data
+        self.left = left
+        self.right = right
+        self.father = father        
+    
 
     

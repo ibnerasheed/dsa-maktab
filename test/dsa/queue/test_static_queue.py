@@ -14,6 +14,7 @@ class TestStaticQueue(unittest.TestCase):
         self.assertTrue(self.queue.empty())
 
     def test_queue_enque_operation(self):
+        
         self.assertTrue(self.queue.empty())
         self.queue.enqueue(3)
         self.assertEqual("[3]", str(self.queue))
