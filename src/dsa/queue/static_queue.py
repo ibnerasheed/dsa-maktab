@@ -28,9 +28,14 @@ class FixedSizeQueue:
     def dequeue(self):
         if self.empty():
             raise UnderflowException('Queue Underflow')
+        
         dequeued_element = self.__data[self.__front]
-        self.__front = (self.__front + 1) % self.__capacity
-        self.__size-=1
+        if self.__front == self.__rear:  
+            self.__front = self.__rear = -1
+        else:      
+            self.__front = (self.__front + 1) % self.__capacity
+            
+        self.__size-=1    
         return dequeued_element
    
    

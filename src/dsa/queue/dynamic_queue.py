@@ -25,6 +25,11 @@ class DynamicQueue:
             raise UnderflowException('Queue Underflow')
         data = self.__front.data
         self.__front = self.__front.next
+        self.__size = self.__size - 1
+
+        if self.__front is None:
+            self.__rear = None
+                 
         return data
         
 

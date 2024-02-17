@@ -4,7 +4,7 @@ from dsa.tree.bst import BSTree
 
 class Testbs_tree(unittest.TestCase):
     def setUp(self) -> None:
-        self.bs_tree = BSTree()
+        self.bs_tree = BSTree(True)
         return super().setUp()
     
     def tearDown(self) -> None:
@@ -58,9 +58,14 @@ class Testbs_tree(unittest.TestCase):
         self.populate_tree_data()  
         self.assertEqual("[100, 20, 200, 10, 30, 150, 300]", self.bs_tree.level_order())   
     
+    def test_search_should_return_true_if_search_key_is_present(self):
+        self.populate_tree_data()
+        self.assertTrue(self.bs_tree.search(100))
+   
+    def test_search_should_return_false_if_search_key_is_not_present(self):
+        self.populate_tree_data()
+        self.assertFalse(self.bs_tree.search(500))    
 
-    def test_tree_order(self):
-        self.assertTrue(True)
             
 
 
