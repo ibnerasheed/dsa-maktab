@@ -127,7 +127,7 @@ class Testbs_tree(unittest.TestCase):
     def test_delete_node_when_it_has_both_child(self):  
         self.populate_tree_data()
         self.bs_tree.delete(200)
-        self.assertEqual("[20, 30, 100, 150, 300]", str(self.bs_tree)) 
+        self.assertEqual("[10, 20, 30, 100, 150, 300]", str(self.bs_tree)) 
 
 
     def test_delete_root_node_when_it_has_both_child(self):  

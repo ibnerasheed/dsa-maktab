@@ -143,11 +143,21 @@ class BSTree:
                     return node.left
                 if node.left is None and node.right is None:
                     return None
+                else:
+                    son = self.find_min(node.right)
+                    node.data = son.data
+                    node.right = self.delete(node.right,son.data)
             
             return node
                        
         def is_right_child(self, node):
             return node.father.right == node
+        
+        def find_min(self, node):
+            temp = node
+            while temp.left is not None:
+                temp = temp.left
+            return temp
 
     class __IterativeTreeAlgorithms(TreeAlgorithms):
         def search(self, root, data):
