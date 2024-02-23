@@ -32,7 +32,7 @@ class BSTree:
 
     def level_order(self):
         if self.empty():
-            return ""
+            return "[]"
 
         result = ""
         
@@ -51,10 +51,23 @@ class BSTree:
         return f"[{result[:-2]}]"
         
     def search(self, data):
-        return self.__tree_algo.search(self.__head, data)      
+        return self.__tree_algo.search(self.__head, data)  
+
+
+    def delete(self, data):
+        self.__head = self.__tree_algo.delete(self.__head, data)    
+    
+    
+            
+
+
+            
+            
 
     def __str__(self):
         return self.inorder()
+    
+
     
     class TreeAlgorithms:
         def search(self, root, data):
@@ -71,6 +84,7 @@ class BSTree:
 
         def delete(self, root, data): 
             pass
+            
     
     class __RecursiveTreeAlgorithms(TreeAlgorithms):
         def search(self, root, data):
@@ -112,6 +126,24 @@ class BSTree:
                 root.right = TreeNode(data, father=root)
             else:
                 self.insert(root.right, data)
+
+
+        def delete(self, node, data):
+            if node is None :
+                raise ValueError(f"Data: {data} not found")
+
+            if data < node.data: 
+                node.left = self.delete(node.left, data)
+            elif data > node.data:
+                node.right = self.delete(node.right, data)
+            else: 
+                if node.left is None and node.right is None:
+                    return None
+            
+            return node
+                       
+        def is_right_child(self, node):
+            return node.father.right == node
 
     class __IterativeTreeAlgorithms(TreeAlgorithms):
         def search(self, root, data):
