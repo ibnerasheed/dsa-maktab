@@ -137,6 +137,10 @@ class BSTree:
             elif data > node.data:
                 node.right = self.delete(node.right, data)
             else: 
+                if node.left is None:
+                    return node.right   
+                if node.right is None:
+                    return node.left
                 if node.left is None and node.right is None:
                     return None
             

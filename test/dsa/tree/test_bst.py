@@ -101,33 +101,37 @@ class Testbs_tree(unittest.TestCase):
         self.bs_tree.insert(20)
         self.bs_tree.insert(200)
         self.bs_tree.insert(30)
-        self.bs_tree.delete(30)
-        self.assertEqual("[20, 100, 200]", str(self.bs_tree))
+        self.bs_tree.delete(20)
+        self.assertEqual("[30, 100, 200]", str(self.bs_tree))
         
-
     def test_delete_node_when_it_has_only_left_child(self):
         self.bs_tree.insert(100)
         self.bs_tree.insert(20)
         self.bs_tree.insert(200)
         self.bs_tree.insert(10)
-        self.bs_tree.delete(10)
-        self.assertEqual("[20, 100, 200]", str(self.bs_tree))
+        self.bs_tree.delete(20)
+        self.assertEqual("[10, 100, 200]", str(self.bs_tree))
         
-
     def test_delete_root_node_when_it_has_only_right_child(self):
         self.bs_tree.insert(100)
         self.bs_tree.insert(200)
-        self.bs_tree.delete(200)
-        self.assertEqual("[100]", str(self.bs_tree))
-
-
-        
+        self.bs_tree.delete(100)
+        self.assertEqual("[200]", str(self.bs_tree))
 
     def test_delete_root_node_when_it_has_only_left_child(self):
         self.bs_tree.insert(100)
         self.bs_tree.insert(20)
-        self.bs_tree.delete(20)
-        self.assertEqual("[100]", str(self.bs_tree))
+        self.bs_tree.delete(100)
+        self.assertEqual("[20]", str(self.bs_tree))
+
+    def test_delete_node_when_it_has_both_child(self):  
+        self.populate_tree_data()
+        self.bs_tree.delete(200)
+        self.assertEqual("[20, 30, 100, 150, 300]", str(self.bs_tree)) 
+
+
+    def test_delete_root_node_when_it_has_both_child(self):  
+        pass
       
 
 
