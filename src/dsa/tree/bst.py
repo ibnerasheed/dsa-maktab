@@ -1,6 +1,6 @@
 from dsa.common.node import TreeNode
 from dsa.queue.dynamic_queue import DynamicQueue
-from dsa.queue.static_queue import FixedSizeQueue
+from dsa.common.exceptions import EmptyTreeException
 
 
 class BSTree:
@@ -53,19 +53,20 @@ class BSTree:
     def search(self, data):
         return self.__tree_algo.search(self.__head, data)  
 
-
+    def height(self):
+        height = self.__tree_algo.height(self.__head)
+        if height == -1:
+            raise EmptyTreeException("Empty Tree")
+        return height
+        
     def delete(self, data):
         self.__head = self.__tree_algo.delete(self.__head, data)    
-    
-    
-            
-
-
-            
-            
-
+                
     def __str__(self):
         return self.inorder()
+    
+    def __len__(self):
+        return self.__tree_algo.length(self.__head)
     
 
     
@@ -84,6 +85,9 @@ class BSTree:
 
         def delete(self, root, data): 
             pass
+
+        def height(self, root):
+            pass    
             
     
     class __RecursiveTreeAlgorithms(TreeAlgorithms):
@@ -127,11 +131,22 @@ class BSTree:
             else:
                 self.insert(root.right, data)
 
+        def height(self, root):
+            if root is None:
+                return -1
+            else:
+                return max(self.height(root.left) + 1, self.height(root.right) + 1)
 
+                
+                
+        def length(self, root):
+            if root is None:
+                return 0
+            return self.length(root.left) + self.length(root.right) + 1
+            
         def delete(self, node, data):
             if node is None :
                 raise ValueError(f"Data: {data} not found")
-
             if data < node.data: 
                 node.left = self.delete(node.left, data)
             elif data > node.data:

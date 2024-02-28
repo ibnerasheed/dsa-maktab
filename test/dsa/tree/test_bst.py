@@ -1,5 +1,6 @@
 import unittest
 from dsa.tree.bst import BSTree
+from dsa.common.exceptions import EmptyTreeException
 
 
 class Testbs_tree(unittest.TestCase):
@@ -130,9 +131,36 @@ class Testbs_tree(unittest.TestCase):
         self.assertEqual("[10, 20, 30, 100, 150, 300]", str(self.bs_tree)) 
 
 
-    def test_delete_root_node_when_it_has_both_child(self):  
-        pass
-      
+    def test_height_of_tree(self):
+        self.bs_tree.insert(8)
+        self.bs_tree.insert(3)
+        self.bs_tree.insert(10) 
+        self.bs_tree.insert(1) 
+        self.bs_tree.insert(6) 
+        self.bs_tree.insert(14)  
+        self.bs_tree.insert(4)
+        self.bs_tree.insert(7)
+        self.bs_tree.insert(13)
+
+        self.assertEqual(3, self.bs_tree.height())
+
+    def test_height_of_empty_tree(self):
+        with self.assertRaises(EmptyTreeException) as exp:
+            tree_height = self.bs_tree.height()
+        self.assertEqual("Empty Tree", str(exp.exception))
+
+    def test_height_if_tree_has_one_node(self):
+        self.bs_tree.insert(8)
+        self.assertEqual(0, self.bs_tree.height())
+
+    def test_length_of_a_tree(self):
+        self.populate_tree_data()
+        self.assertEqual(7, len(self.bs_tree))
+
+
+    def test_length_of_a_tree_when_it_has_only_one_node(self):
+        self.bs_tree.insert(3)
+        self.assertEqual(1, len(self.bs_tree))
 
 
 
