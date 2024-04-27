@@ -14,7 +14,9 @@ class TreeNode:
         self.data = data
         self.left = left
         self.right = right
-        self.father = father        
+        self.father = father   
+
+           
     
 
     
